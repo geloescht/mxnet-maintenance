@@ -25,12 +25,12 @@ To install MXNet Python package, visit MXNet [Install Instruction](https://mxnet
 
 ## Running the unit tests
 
-For running unit tests, you will need the [nose PyPi package](https://pypi.python.org/pypi/nose). To install:
+For running unit tests, you will need the [pynose PyPi package](https://pypi.org/project/pynose/). To install:
 ```bash
-pip install --upgrade nose
+pip install --upgrade pynose
 ```
 
-Once ```nose``` is installed, run the following from MXNet root directory (please make sure the installation path of ```nosetests``` is included in your ```$PATH``` environment variable):
+Once ```pynose``` is installed, run the following from MXNet root directory (please make sure the installation path of ```nosetests``` is included in your ```$PATH``` environment variable):
 ```
 nosetests tests/python/unittest
 nosetests tests/python/train
