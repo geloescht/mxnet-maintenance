@@ -115,13 +115,13 @@ class TestImage(unittest.TestCase):
     IMAGES_DIR = None
 
     @classmethod
-    def setupClass(cls):
+    def setup_class(cls):
         cls.IMAGES_DIR = tempfile.mkdtemp()
         cls.IMAGES = _get_data(cls.IMAGES_URL, cls.IMAGES_DIR)
         print("Loaded {} images".format(len(cls.IMAGES)))
 
     @classmethod
-    def teardownClass(cls):
+    def teardown_class(cls):
         if cls.IMAGES_DIR:
             print("cleanup {}".format(cls.IMAGES_DIR))
             shutil.rmtree(cls.IMAGES_DIR)
