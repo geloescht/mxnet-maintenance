@@ -81,7 +81,7 @@ def test_np_empty():
 @with_seed()
 @use_np
 def test_np_array_creation():
-    dtypes = [_np.int8, _np.int32, _np.float16, _np.float32, _np.float64, _np.bool, _np.bool_,
+    dtypes = [_np.int8, _np.int32, _np.float16, _np.float32, _np.float64, bool, _np.bool_,
               'int8', 'int32', 'float16', 'float32', 'float64', 'bool', None]
     objects = [
         [],
@@ -155,7 +155,7 @@ def test_np_zeros():
                 assert type(y[1]) == np.ndarray
 
     for shape in shapes:
-        for dtype in [_np.bool, bool, _np.bool, 'bool']:
+        for dtype in [bool, _np.bool_, 'bool']:
             check_zero_array_creation(shape, dtype)
 
 
@@ -209,7 +209,7 @@ def test_np_ones():
                 assert type(y[1]) == np.ndarray
 
     for shape in shapes:
-        for dtype in [_np.bool, bool, _np.bool, 'bool']:
+        for dtype in [bool, _np.bool_, 'bool']:
             check_ones_array_creation(shape, dtype)
 
 
@@ -1281,7 +1281,7 @@ def test_np_ndarray_boolean_indexing():
 @with_seed()
 @use_np
 def test_np_get_dtype():
-    dtypes = [_np.int8, _np.int32, _np.float16, _np.float32, _np.float64, _np.bool, _np.bool_,
+    dtypes = [_np.int8, _np.int32, _np.float16, _np.float32, _np.float64, bool, _np.bool_,
               'int8', 'int32', 'float16', 'float32', 'float64', 'bool', None]
     objects = [
         [],

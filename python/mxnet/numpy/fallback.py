@@ -54,7 +54,6 @@ __all__ = [
     'ix_',
     'lexsort',
     'min_scalar_type',
-    'mirr',
     'modf',
     'msort',
     'nanargmax',
@@ -68,7 +67,6 @@ __all__ = [
     'nanprod',
     'nanquantile',
     'ndim',
-    'npv',
     'partition',
     'piecewise',
     'packbits',
@@ -80,11 +78,8 @@ __all__ = [
     'polymul',
     'polysub',
     'positive',
-    'ppmt',
     'promote_types',
     'ptp',
-    'pv',
-    'rate',
     'real',
     'result_type',
     'rollaxis',
@@ -140,7 +135,6 @@ isin = onp.isin
 ix_ = onp.ix_
 lexsort = onp.lexsort
 min_scalar_type = onp.min_scalar_type
-mirr = onp.mirr
 modf = onp.modf
 msort = onp.msort
 nanargmax = onp.nanargmax
@@ -157,11 +151,9 @@ nanstd = onp.nanstd
 nansum = onp.nansum
 nanvar = onp.nanvar
 ndim = onp.ndim
-npv = onp.npv
 partition = onp.partition
 packbits = onp.packbits
 piecewise = onp.piecewise
-pmt = onp.pmt
 poly = onp.poly
 polyadd = onp.polyadd
 polydiv = onp.polydiv
@@ -170,11 +162,8 @@ polyint = onp.polyint
 polymul = onp.polymul
 polysub = onp.polysub
 positive = onp.positive
-ppmt = onp.ppmt
 promote_types = onp.promote_types
 ptp = onp.ptp
-pv = onp.pv
-rate = onp.rate
 real = onp.real
 result_type = onp.result_type
 rollaxis = onp.rollaxis

@@ -374,7 +374,7 @@ def full(shape, fill_value, dtype=None, order='C', ctx=None, out=None):  # pylin
         return ret
     if isinstance(fill_value, bool):
         fill_value = int(fill_value)
-        dtype = _np.bool if dtype is None else dtype
+        dtype = bool if dtype is None else dtype
     dtype = _np.float32 if dtype is None else dtype
     return _npi.full(shape=shape, value=fill_value, ctx=ctx, dtype=dtype, out=out)
 # pylint: enable=too-many-arguments, redefined-outer-name
@@ -7152,7 +7152,7 @@ def isposinf(x, out=None, **kwargs):
     >>> np.isposinf(np.array([-np.inf, 0., np.inf]))
     array([False, False,  True])
     >>> x = np.array([-np.inf, 0., np.inf])
-    >>> y = np.array([True, True, True], dtype=np.bool)
+    >>> y = np.array([True, True, True], dtype=bool)
     >>> np.isposinf(x, y)
     array([False, False,  True])
     >>> y
@@ -7198,7 +7198,7 @@ def isneginf(x, out=None, **kwargs):
     >>> np.isneginf(np.array([-np.inf, 0., np.inf]))
     array([ True, False, False])
     >>> x = np.array([-np.inf, 0., np.inf])
-    >>> y = np.array([True, True, True], dtype=np.bool)
+    >>> y = np.array([True, True, True], dtype=bool)
     >>> np.isneginf(x, y)
     array([ True, False, False])
     >>> y
@@ -7253,7 +7253,7 @@ def isfinite(x, out=None, **kwargs):
     >>> np.isfinite(np.array([np.log(-1.),1.,np.log(0)]))
     array([False,  True, False])
     >>> x = np.array([-np.inf, 0., np.inf])
-    >>> y = np.array([True, True, True], dtype=np.bool)
+    >>> y = np.array([True, True, True], dtype=bool)
     >>> np.isfinite(x, y)
     array([False,  True, False])
     >>> y

@@ -34,7 +34,7 @@ int32 = onp.int32
 int8 = onp.int8
 int64 = onp.int64
 bool_ = onp.bool_
-bool = onp.bool
+bool = bool # this is so bool can be exported from this package. From numpy 1.20 on, the alias numpy.bool does not exist anymore
 
 pi = onp.pi
 inf = onp.inf

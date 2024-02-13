@@ -537,7 +537,7 @@ def test_slice_channel():
         outputs = exe.forward(is_train=True, data=data_npy)
         for i in range(num_outputs):
             gt = data_npy.take(np.arange(i * shape[axis]/num_outputs,
-                                         (i+1) * shape[axis]/num_outputs).astype(np.int), axis=axis)
+                                         (i+1) * shape[axis]/num_outputs).astype(int), axis=axis)
             if squeeze_axis:
                 assert_almost_equal(outputs[i], gt.reshape(outputs[i].shape))
             else:
@@ -6194,8 +6194,8 @@ def test_psroipooling():
             for image_height, image_width in itertools.product([168, 224], [168, 224]):
                 for grad_nodes in [['im_data']]:
                     spatial_scale = 0.0625
-                    feat_height = np.int(image_height * spatial_scale)
-                    feat_width = np.int(image_width * spatial_scale)
+                    feat_height = int(image_height * spatial_scale)
+                    feat_width = int(image_width * spatial_scale)
                     im_data = np.random.rand(1, num_classes*num_group*num_group, feat_height, feat_width)
                     rois_data = np.zeros([num_rois, 5])
                     rois_data[:, [1,3]] = np.sort(np.random.rand(num_rois, 2)*(image_width-1))

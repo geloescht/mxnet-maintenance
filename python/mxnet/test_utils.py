@@ -77,7 +77,7 @@ def default_rtols():
     return {np.dtype(np.float16): 1e-2,
             np.dtype(np.float32): 1e-4,
             np.dtype(np.float64): 1e-5,
-            np.dtype(np.bool): 0,
+            np.dtype(bool): 0,
             np.dtype(np.int8): 0,
             np.dtype(np.uint8): 0,
             np.dtype(np.int32): 0,
@@ -90,7 +90,7 @@ def default_atols():
     return {np.dtype(np.float16): 1e-1,
             np.dtype(np.float32): 1e-3,
             np.dtype(np.float64): 1e-20,
-            np.dtype(np.bool): 0,
+            np.dtype(bool): 0,
             np.dtype(np.int8): 0,
             np.dtype(np.uint8): 0,
             np.dtype(np.int32): 0,
@@ -2316,7 +2316,7 @@ def chi_square_check(generator, buckets, probs, nsamples=1000000):
         sample_bucket_ids = np.array(samples)
     if continuous_dist:
         sample_bucket_ids = sample_bucket_ids // 2
-    obs_freq = np.zeros(shape=len(buckets), dtype=np.int)
+    obs_freq = np.zeros(shape=len(buckets), dtype=int)
     for i, _ in enumerate(buckets):
         if continuous_dist:
             obs_freq[i] = (sample_bucket_ids == i).sum()
