@@ -240,7 +240,7 @@ def test_NDArrayIter_h5py():
         os.remove('ndarraytest.h5')
     except OSError:
         pass
-    with h5py.File('ndarraytest.h5') as f:
+    with h5py.File('ndarraytest.h5', 'w') as f:
         f.create_dataset('data', data=data)
         f.create_dataset('label', data=labels)
         
