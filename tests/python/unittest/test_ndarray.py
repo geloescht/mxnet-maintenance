@@ -2032,19 +2032,19 @@ def test_update_ops_mutation_failed_seed():
 def test_large_int_rounding():
     large_integer = 50000001
 
-    a = mx.nd.array([large_integer], dtype='int32')
+    a = mx.nd.array([large_integer], dtype='int32').asnumpy()
     assert np.all(a == large_integer)
 
-    a = mx.nd.array([large_integer], dtype='int32').floor()
+    a = mx.nd.array([large_integer], dtype='int32').floor().asnumpy()
     assert np.all(a == large_integer)
 
-    a = mx.nd.array([large_integer], dtype='int32').round()
+    a = mx.nd.array([large_integer], dtype='int32').round().asnumpy()
     assert np.all(a == large_integer)
 
-    a = mx.nd.array([large_integer], dtype='int32').ceil()
+    a = mx.nd.array([large_integer], dtype='int32').ceil().asnumpy()
     assert np.all(a == large_integer)
 
-    a = mx.nd.array([large_integer], dtype='int32').trunc()
+    a = mx.nd.array([large_integer], dtype='int32').trunc().asnumpy()
     assert np.all(a == large_integer)
 
 

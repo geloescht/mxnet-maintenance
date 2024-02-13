@@ -214,8 +214,8 @@ def test_subgraph():
                                        return_mapping=True)
     subgs[0].check_format()
     subgs[1].check_format()
-    assert_array_equal(subgs[0].indptr, subgs[1].indptr)
-    assert_array_equal(subgs[0].indices, subgs[1].indices)
+    assert_array_equal(subgs[0].indptr.asnumpy(), subgs[1].indptr.asnumpy())
+    assert_array_equal(subgs[0].indices.asnumpy(), subgs[1].indices.asnumpy())
     sp_subg = subgs[1].asscipy()
     for i in range(len(subgs[0].indptr) - 1):
         subv1 = i
@@ -236,9 +236,9 @@ def test_adjacency():
     adj = mx.nd.contrib.dgl_adjacency(g)
     assert adj.dtype == np.float32
     assert adj.shape == g.shape
-    assert_array_equal(adj.indptr, g.indptr)
-    assert_array_equal(adj.indices, g.indices)
-    assert_array_equal(adj.data, mx.nd.ones(shape=g.indices.shape))
+    assert_array_equal(adj.indptr.asnumpy(), g.indptr.asnumpy())
+    assert_array_equal(adj.indices.asnumpy(), g.indices.asnumpy())
+    assert_array_equal(adj.data.asnumpy(), mx.nd.ones(shape=g.indices.shape).asnumpy())
 
 if __name__ == "__main__":
     import nose
