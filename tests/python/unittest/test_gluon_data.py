@@ -51,7 +51,7 @@ def prepare_record():
     if not os.path.isdir("data/test_images"):
         os.makedirs('data/test_images')
     if not os.path.isdir("data/test_images/test_images"):
-        gluon.utils.download("http://data.mxnet.io/data/test_images.tar.gz", "data/test_images.tar.gz")
+        gluon.utils.download("https://ipfs.io/ipfs/QmcRv9aaXTJX8EfEJMrADAbrWEZ1p8kCNTpuTPWM9GtHgr/test_images.tar.gz", path='data/')
         tarfile.open('data/test_images.tar.gz').extractall('data/test_images/')
     if not os.path.exists('data/test.rec'):
         imgs = os.listdir('data/test_images/test_images')

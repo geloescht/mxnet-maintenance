@@ -110,7 +110,7 @@ def _test_imageiter_last_batch(imageiter_list, assert_data_shape):
 
 
 class TestImage(unittest.TestCase):
-    IMAGES_URL = "http://data.mxnet.io/data/test_images.tar.gz"
+    IMAGES_URL = "https://ipfs.io/ipfs/QmcRv9aaXTJX8EfEJMrADAbrWEZ1p8kCNTpuTPWM9GtHgr/test_images.tar.gz"
     IMAGES = []
     IMAGES_DIR = None
 
