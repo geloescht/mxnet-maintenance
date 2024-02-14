@@ -25,7 +25,7 @@ from converter._mxnet_converter import convert
 from converter import utils
 
 VAL_DATA = 'data/val-5k-256.rec'
-URL = 'http://data.mxnet.io/data/val-5k-256.rec'
+URL = 'http://repo.mxnet.io/data/val-5k-256.rec'
 
 
 def download_data():

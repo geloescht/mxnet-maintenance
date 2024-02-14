@@ -1817,7 +1817,7 @@ def download(url, fname=None, dirname=None, overwrite=False, retries=5):
     return fname
 
 def download_model(model_name, dst_dir='./', meta_info=None):
-    """Download a model from data.mxnet.io
+    """Download a model from repo.mxnet.io
 
     Parameters
     ----------
@@ -1833,7 +1833,7 @@ def download_model(model_name, dst_dir='./', meta_info=None):
     -------
     Two element tuple containing model_name and epoch for the params saved
     """
-    _base_model_url = 'http://data.mxnet.io/models/'
+    _base_model_url = 'http://repo.mxnet.io/models/'
     _default_model_info = {
         'imagenet1k-inception-bn': {'symbol':_base_model_url+'imagenet/inception-bn/Inception-BN-symbol.json',
                                     'params':_base_model_url+'imagenet/inception-bn/Inception-BN-0126.params'},
@@ -1901,7 +1901,7 @@ def get_mnist():
         return (label, image)
 
     # changed to IPFS for more stable hosting
-    path = 'https://ipfs.io/ipfs/QmazxWBPrSfTzkuzQNvyzYWx438q98Q1pQ7vRJkQZh7x97/'
+    path = 'https://ipfs.io/ipfs/QmNtu53mDe17rGRxx9RVyYx6warLKK8x8XvxGWcJYePsms/'
     (train_lbl, train_img) = read_data(
         path+'train-labels-idx1-ubyte.gz', path+'train-images-idx3-ubyte.gz')
     (test_lbl, test_img) = read_data(
@@ -1929,7 +1929,7 @@ def get_mnist_ubyte():
             (not os.path.exists('data/train-labels-idx1-ubyte')) or \
             (not os.path.exists('data/t10k-images-idx3-ubyte')) or \
             (not os.path.exists('data/t10k-labels-idx1-ubyte')):
-        zip_file_path = download('https://ipfs.io/ipfs/QmWidw3rAuo1M6kM1i3h86ivbtHrukXuJ9vYxpSzY6GdSa/mnist.zip',
+        zip_file_path = download('https://ipfs.io/ipfs/QmNtu53mDe17rGRxx9RVyYx6warLKK8x8XvxGWcJYePsms/mnist.zip',
                                  dirname='data')
         with zipfile.ZipFile(zip_file_path) as zf:
             zf.extractall('data')
@@ -1944,7 +1944,7 @@ def get_cifar10():
             (not os.path.exists('data/cifar/test.rec')) or \
             (not os.path.exists('data/cifar/train.lst')) or \
             (not os.path.exists('data/cifar/test.lst')):
-        zip_file_path = download('https://ipfs.io/ipfs/QmVbSiCwMoap2vqWMFCSaCWL4WoszZ6xURvEJmf1bC6hV4/cifar10.zip',
+        zip_file_path = download('https://ipfs.io/ipfs/QmNtu53mDe17rGRxx9RVyYx6warLKK8x8XvxGWcJYePsms/cifar10.zip',
                                  dirname='data')
         with zipfile.ZipFile(zip_file_path) as zf:
             zf.extractall('data')

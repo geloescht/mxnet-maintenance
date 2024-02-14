@@ -130,24 +130,24 @@ class ModelsTest(unittest.TestCase):
 
     def test_pred_inception_bn(self):
         self._test_model(model_name='Inception-BN', epoch_num=126,
-                         files=["http://data.mxnet.io/models/imagenet/inception-bn/Inception-BN-0126.params",
-                                "http://data.mxnet.io/models/imagenet/inception-bn/Inception-BN-symbol.json"])
+                         files=["http://repo.mxnet.io/models/imagenet/inception-bn/Inception-BN-0126.params",
+                                "http://repo.mxnet.io/models/imagenet/inception-bn/Inception-BN-symbol.json"])
 
     def test_pred_squeezenet_v11(self):
         self._test_model(model_name='squeezenet_v1.1', epoch_num=0,
-                         files=["http://data.mxnet.io/models/imagenet/squeezenet/squeezenet_v1.1-symbol.json",
-                                "http://data.mxnet.io/models/imagenet/squeezenet/squeezenet_v1.1-0000.params"])
+                         files=["http://repo.mxnet.io/models/imagenet/squeezenet/squeezenet_v1.1-symbol.json",
+                                "http://repo.mxnet.io/models/imagenet/squeezenet/squeezenet_v1.1-0000.params"])
 
     def test_pred_resnet_50(self):
         self._test_model(model_name='resnet-50', epoch_num=0,
-                         files=["http://data.mxnet.io/models/imagenet/resnet/50-layers/resnet-50-symbol.json",
-                                "http://data.mxnet.io/models/imagenet/resnet/50-layers/resnet-50-0000.params"])
+                         files=["http://repo.mxnet.io/models/imagenet/resnet/50-layers/resnet-50-symbol.json",
+                                "http://repo.mxnet.io/models/imagenet/resnet/50-layers/resnet-50-0000.params"])
 
     @unittest.skip("Model is too big for unit test")
     def test_pred_vgg16(self):
         self._test_model(model_name='vgg16', epoch_num=0,
-                         files=["http://data.mxnet.io/models/imagenet/vgg/vgg16-symbol.json",
-                                "http://data.mxnet.io/models/imagenet/vgg/vgg16-0000.params"])
+                         files=["http://repo.mxnet.io/models/imagenet/vgg/vgg16-symbol.json",
+                                "http://repo.mxnet.io/models/imagenet/vgg/vgg16-0000.params"])
 
     def test_pred_nin(self):
         self._test_model(model_name='nin', epoch_num=0,
@@ -155,7 +155,7 @@ class ModelsTest(unittest.TestCase):
                                 "http://data.dmlc.ml/models/imagenet/nin/nin-0000.params"])
 
     @unittest.skip("You need to download and unzip file: "
-                   "http://data.mxnet.io/models/imagenet/inception-v3.tar.gz in order to run this test.")
+                   "http://repo.mxnet.io/models/imagenet/inception-v3.tar.gz in order to run this test.")
     def test_pred_inception_v3(self):
         self._test_model(model_name='Inception-7', epoch_num=1, input_shape=(1, 3, 299, 299))
 

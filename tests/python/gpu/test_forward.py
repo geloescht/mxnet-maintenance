@@ -28,7 +28,7 @@ import tarfile
 
 def _get_model():
     if not os.path.exists('model/Inception-7-symbol.json'):
-        download('http://data.mxnet.io/models/imagenet/inception-v3.tar.gz')
+        download('http://repo.mxnet.io/models/imagenet/inception-v3.tar.gz')
         with tarfile.open(name="inception-v3.tar.gz", mode="r:gz") as tf:
             tf.extractall()
 
@@ -50,10 +50,10 @@ def _dump_images(shape):
 def _get_data(shape):
     hash_test_img = "355e15800642286e7fe607d87c38aeeab085b0cc"
     hash_inception_v3 = "91807dfdbd336eb3b265dd62c2408882462752b9"
-    utils.download("http://data.mxnet.io/data/test_images_%d_%d.npy" % (shape),
+    utils.download("http://repo.mxnet.io/data/test_images_%d_%d.npy" % (shape),
                    path="data/test_images_%d_%d.npy" % (shape),
                    sha1_hash=hash_test_img)
-    utils.download("http://data.mxnet.io/data/inception-v3-dump.npz",
+    utils.download("http://repo.mxnet.io/data/inception-v3-dump.npz",
                    path='data/inception-v3-dump.npz',
                    sha1_hash=hash_inception_v3)
 

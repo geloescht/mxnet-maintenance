@@ -35,7 +35,7 @@ def eprint(*args, **kwargs):
 VAL_DATA='data/val-5k-256.rec'
 def download_data():
     return mx.test_utils.download(
-        'http://data.mxnet.io/data/val-5k-256.rec', VAL_DATA)
+        'http://repo.mxnet.io/data/val-5k-256.rec', VAL_DATA)
 
 @with_seed()
 def test_inference():
