@@ -288,7 +288,7 @@ def test_fusion_boolean_inputs():
 
     foo = Foo()
     foo.hybridize(static_alloc=True)
-    out = foo(mx.np.ones((10,), ctx=mx.gpu(), dtype=np.bool))
+    out = foo(mx.np.ones((10,), ctx=mx.gpu(), dtype=bool))
     mx.npx.waitall()
 
 @with_seed()
