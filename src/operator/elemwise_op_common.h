@@ -53,7 +53,6 @@ inline bool ElemwiseStorageAttr(const nnvm::NodeAttrs& attrs,
                                 DispatchMode* dispatch_mode,
                                 std::vector<int> *in_attrs,
                                 std::vector<int> *out_attrs) {
-  using namespace common;
   bool dispatched = false;
   const bool invalid_ctx = cpu_only && dev_mask != mshadow::cpu::kDevMask;
   const auto dispatch_ex = invalid_ctx ? DispatchMode::kFComputeFallback :
@@ -63,7 +62,7 @@ inline bool ElemwiseStorageAttr(const nnvm::NodeAttrs& attrs,
     dispatched = storage_type_assign(out_attrs, kDefaultStorage,
                                      dispatch_mode, DispatchMode::kFCompute);
   }
-  if (!dispatched && rsp && ContainsOnlyStorage(*in_attrs, kRowSparseStorage)) {
+  if (!dispatched && rsp && common::ContainsOnlyStorage(*in_attrs, kRowSparseStorage)) {
     // rsp, rsp, ... -> rsp
     dispatched = storage_type_assign(out_attrs, kRowSparseStorage,
                                      dispatch_mode, dispatch_ex);
@@ -78,7 +77,7 @@ inline bool ElemwiseStorageAttr(const nnvm::NodeAttrs& attrs,
     dispatched = storage_type_assign(out_attrs, kDefaultStorage,
                                      dispatch_mode, dispatch_ex);
   }
-  if (!dispatched && in_attrs->size() > 4U && ContainsStorageType(*in_attrs, kDefaultStorage)) {
+  if (!dispatched && in_attrs->size() > 4U && common::ContainsStorageType(*in_attrs, kDefaultStorage)) {
     // *, dense, * -> dense
     dispatched = storage_type_assign(out_attrs, kDefaultStorage,
                                      dispatch_mode, dispatch_ex);
@@ -87,7 +86,7 @@ inline bool ElemwiseStorageAttr(const nnvm::NodeAttrs& attrs,
     dispatch_fallback(out_attrs, dispatch_mode);
   }
   if (static_cast<DispatchMode>(*dispatch_mode) == DispatchMode::kFComputeFallback) {
-    LogStorageFallback(attrs, dev_mask, in_attrs, out_attrs);
+    common::LogStorageFallback(attrs, dev_mask, in_attrs, out_attrs);
   }
   return true;
 }

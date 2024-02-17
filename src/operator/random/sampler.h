@@ -27,12 +27,11 @@
 
 #include <algorithm>
 
-using namespace mshadow;
-using namespace mxnet::op::mxnet_op;
-using namespace mxnet::common::random;
-
 namespace mxnet {
 namespace op {
+
+using namespace mxnet::op::mxnet_op;
+using namespace mxnet::common::random;
 
 /*!
  * \brief Launch a generic kernel with parallel random generator.

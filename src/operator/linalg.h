@@ -29,7 +29,15 @@
 #include <mxnet/op_attr_types.h>
 
 #include "./c_lapack_api.h"
-using namespace mshadow;
+
+using mshadow::Tensor;
+using mshadow::Shape1;
+using mshadow::Shape2;
+using mshadow::Shape3;
+using mshadow::Stream;
+using mshadow::index_t;
+using mxnet::cpu;
+using mxnet::gpu;
 
 // The purpose of this header is to expose the interfaces of the advanced
 // linear algebra functions without clutter by the implementations. In contrast

@@ -352,7 +352,6 @@ class ElemwiseBinaryOp : public OpBase {
                                       DispatchMode* dispatch_mode,
                                       std::vector<int> *in_attrs,
                                       std::vector<int> *out_attrs) {
-    using namespace common;
     CHECK_EQ(in_attrs->size(), 2U) << " in operator " << attrs.name;
     CHECK_EQ(out_attrs->size(), 1U) << " in operator " << attrs.name;
     const auto& lhs_stype = in_attrs->at(0);
@@ -362,17 +361,17 @@ class ElemwiseBinaryOp : public OpBase {
     const bool invalid_ctx = dev_mask != mshadow::cpu::kDevMask;
     const auto dispatch_ex = invalid_ctx ? DispatchMode::kFComputeFallback :
                              DispatchMode::kFComputeEx;
-    if (!dispatched && ContainsOnlyStorage(*in_attrs, kDefaultStorage)) {
+    if (!dispatched && common::ContainsOnlyStorage(*in_attrs, kDefaultStorage)) {
       // dns, dns -> dns
       dispatched = storage_type_assign(&out_stype, kDefaultStorage,
                                        dispatch_mode, DispatchMode::kFCompute);
     }
-    if (!dispatched && ContainsOnlyStorage(*in_attrs, kRowSparseStorage)) {
+    if (!dispatched && common::ContainsOnlyStorage(*in_attrs, kRowSparseStorage)) {
         // rsp, rsp -> rsp
         dispatched = storage_type_assign(&out_stype, kRowSparseStorage,
                                          dispatch_mode, dispatch_ex);
     }
-    if (!dispatched && ContainsOnlyStorage(*in_attrs, kCSRStorage)) {
+    if (!dispatched && common::ContainsOnlyStorage(*in_attrs, kCSRStorage)) {
         // csr, csr -> csr
         dispatched = storage_type_assign(&out_stype, kCSRStorage,
                                          dispatch_mode, dispatch_ex);
@@ -416,7 +415,6 @@ class ElemwiseBinaryOp : public OpBase {
                                      DispatchMode* dispatch_mode,
                                      std::vector<int> *in_attrs,
                                      std::vector<int> *out_attrs) {
-    using namespace common;
     CHECK_EQ(in_attrs->size(), 2);
     CHECK_EQ(out_attrs->size(), 1);
     const auto lhs_stype = (*in_attrs)[0];
@@ -425,17 +423,17 @@ class ElemwiseBinaryOp : public OpBase {
     const bool invalid_ctx = cpu_only && dev_mask != mshadow::cpu::kDevMask;
     const auto dispatch_ex = invalid_ctx ? DispatchMode::kFComputeFallback :
                                            DispatchMode::kFComputeEx;
-    if (!dispatched && ContainsOnlyStorage(*in_attrs, kDefaultStorage)) {
+    if (!dispatched && common::ContainsOnlyStorage(*in_attrs, kDefaultStorage)) {
       // dns, dns ... -> dns
       dispatched = storage_type_assign(out_attrs, kDefaultStorage,
                                        dispatch_mode, DispatchMode::kFCompute);
     }
-    if (!dispatched && rsp && ContainsOnlyStorage(*in_attrs, kRowSparseStorage)) {
+    if (!dispatched && rsp && common::ContainsOnlyStorage(*in_attrs, kRowSparseStorage)) {
       // rsp, rsp, ... -> rsp
       dispatched = storage_type_assign(out_attrs, kRowSparseStorage,
                                        dispatch_mode, DispatchMode::kFComputeEx);
     }
-    if (!dispatched && csr && ContainsOnlyStorage(*in_attrs, kCSRStorage)) {
+    if (!dispatched && csr && common::ContainsOnlyStorage(*in_attrs, kCSRStorage)) {
       // csr, csr, ... -> csr
       dispatched = storage_type_assign(out_attrs, kCSRStorage,
                                        dispatch_mode, dispatch_ex);
@@ -604,7 +602,6 @@ class ElemwiseBinaryOp : public OpBase {
                         const std::vector<NDArray> &inputs,
                         const std::vector<OpReqType> &req,
                         const std::vector<NDArray> &outputs) {
-    using namespace common;
     CHECK_EQ(inputs.size(), 2);
     CHECK_EQ(outputs.size(), 1);
     if (req[0] == kNullOp) return;
@@ -612,13 +609,13 @@ class ElemwiseBinaryOp : public OpBase {
     const auto rhs_stype = inputs[1].storage_type();
     const auto out_stype = outputs[0].storage_type();
     mshadow::Stream<xpu> *s = ctx.get_stream<xpu>();
-    if ((ContainsOnlyStorage(inputs, kRowSparseStorage)) &&
+    if ((common::ContainsOnlyStorage(inputs, kRowSparseStorage)) &&
         (out_stype == kRowSparseStorage || out_stype == kDefaultStorage)) {
       // rsp, rsp -> rsp
       // rsp, rsp -> dns
       RspRspOp<OP>(
             s, attrs, ctx, inputs[0], inputs[1], req[0], outputs[0], false, false, false, false);
-    } else if (ContainsOnlyStorage(inputs, kCSRStorage) && out_stype == kCSRStorage) {
+    } else if (common::ContainsOnlyStorage(inputs, kCSRStorage) && out_stype == kCSRStorage) {
       // csr, csr -> csr
       CsrCsrOp<OP>(s, attrs, ctx, inputs[0], inputs[1], req[0], outputs[0]);
     } else if (((lhs_stype == kCSRStorage && rhs_stype == kDefaultStorage) ||
@@ -775,13 +772,12 @@ class ElemwiseBinaryOp : public OpBase {
                                      const std::vector<NDArray> &inputs,
                                      const std::vector<OpReqType> &req,
                                      const std::vector<NDArray> &outputs) {
-    using namespace common;
     CHECK_EQ(inputs.size(), 3U);
     CHECK_EQ(outputs.size(), 2U);  // lhs input grad, rhs input grad
     const auto out_grad_stype = inputs[0].storage_type();
     const auto lhs_grad_stype = outputs[0].storage_type();
     const auto rhs_grad_stype = outputs[1].storage_type();
-    if (ContainsOnlyStorage(inputs, kRowSparseStorage) &&
+    if (common::ContainsOnlyStorage(inputs, kRowSparseStorage) &&
         (lhs_grad_stype == kDefaultStorage || lhs_grad_stype == kRowSparseStorage) &&
         (rhs_grad_stype == kDefaultStorage || rhs_grad_stype == kRowSparseStorage)) {
       // rsp, rsp, rsp -> [dns, rsp], [dns, rsp]

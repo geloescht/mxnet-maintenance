@@ -745,6 +745,7 @@ class CuDNNConvolutionOp {
 
   // Given a tensor shape of this operation, return the number of features 'c'
   int64_t Features(const mxnet::TShape &dshape) {
+    using namespace mshadow;
     int c = 0;
     switch (dshape.ndim()) {
       case 3: c = ConvertLayout(dshape.get<3>(), param_.layout.value(), kNCW)[1]; break;

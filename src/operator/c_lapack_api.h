@@ -68,7 +68,7 @@
 #include <dmlc/logging.h>
 #include "mshadow/tensor.h"
 
-using namespace mshadow;
+using mshadow::cpu;
 
 // Will cause clash with MKL/ArmPL fortran layer headers
 #if (!MSHADOW_USE_MKL && !MSHADOW_USE_ARMPL)
