@@ -3066,7 +3066,7 @@ def test_crop():
                 idx.append(slice(b, e))
             x = mx.nd.array(np.random.normal(size=dims))
             y = mx.nd.crop(x, begin=tuple(begin), end=tuple(end))
-            assert_allclose(x.asnumpy()[idx], y.asnumpy())
+            assert_allclose(x.asnumpy()[tuple(idx)], y.asnumpy())
 
             vx = mx.sym.Variable('x')
             vy = mx.sym.crop(vx, begin=tuple(begin), end=tuple(end))
@@ -3092,6 +3092,8 @@ def test_slice_axis():
             for i in range(ndim):
                 idx.append(slice(0, shape[i]))
             idx[t] = slice(b, e)
+
+            idx = tuple(idx)
 
             X = mx.symbol.Variable('X')
             x = mx.nd.array(np.random.normal(size=shape))
@@ -3136,6 +3138,8 @@ def test_slice_like():
                 pos = np.random.randint(0, t)
                 if axes[pos] > 0:
                     axes[pos] -= ndim  # negative index
+
+            idx = tuple(idx)
 
             X = mx.symbol.Variable('X')
             X_1 = mx.symbol.Variable('X1')
@@ -3197,7 +3201,7 @@ def test_flip():
         for t in range(5):
             dims = [random.randint(1,10) for i in range(ndim)]
             axis = random.randint(0, ndim-1)
-            idx = [slice(None, None, -1) if i == axis else slice(None, None) for i in range(ndim)]
+            idx = tuple([slice(None, None, -1) if i == axis else slice(None, None) for i in range(ndim)])
             x = mx.nd.array(np.random.normal(size=dims))
             y = mx.nd.flip(x, axis=axis)
             assert_allclose(x.asnumpy()[idx], y.asnumpy())
@@ -5517,7 +5521,8 @@ def test_pick():
                     ishape = [1 for _ in range(ndim)]
                     ishape[i] = bshape[i]
                     exp.append(np.arange(bshape[i]).reshape(ishape))
-            expected = data[exp]
+
+            expected = data[tuple(exp)]
             data = mx.nd.array(data, dtype='float32')
             index = mx.nd.array(index, dtype=index_type)
             out = mx.nd.pick(data, index, axis=axis, keepdims=True, mode=mode)
