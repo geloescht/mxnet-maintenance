@@ -3811,7 +3811,7 @@ def check_l2_normalization(in_shape, mode, dtype, norm_eps=1e-10):
     exe = out.simple_bind(ctx=ctx, data=in_data.shape)
     output = exe.forward(is_train=True, data=in_data)
     # compare numpy + mxnet
-    assert_almost_equal(exe.outputs[0], np_out, rtol=1e-2 if dtype is 'float16' else 1e-5, atol=1e-5)
+    assert_almost_equal(exe.outputs[0], np_out, rtol=1e-2 if dtype == 'float16' else 1e-5, atol=1e-5)
     # check gradient
     check_numeric_gradient(out, [in_data], numeric_eps=1e-3, rtol=1e-2, atol=5e-3)
 
@@ -3964,8 +3964,8 @@ def test_norm():
                             in_data = np.random.uniform(-1, 1, in_shape).astype(accumulation_type)
                             in_data[abs(in_data) < epsilon] = 2 * epsilon
                             norm_sym = mx.symbol.norm(data=data, ord=order, axis=i, out_dtype=out_dtype, keepdims=True)
-                            npy_out = l1norm(in_data, i) if order is 1 else l2norm(in_data, i)
-                            npy_out_backward = np.sign(in_data) if order is 1 else in_data/npy_out
+                            npy_out = l1norm(in_data, i) if order == 1 else l2norm(in_data, i)
+                            npy_out_backward = np.sign(in_data) if order == 1 else in_data/npy_out
                             check_symbolic_forward(norm_sym, [in_data.astype(dtype)], [npy_out.astype(out_dtype)],
                                                    rtol=1e-2 if dtype == np.float16 else 1e-3,
                                                    atol=1e-4 if dtype == np.float16 else 1e-5, ctx=ctx, dtype=dtype)
@@ -3981,8 +3981,8 @@ def test_norm():
                                                    rtol=1e-1, atol=1e-3, dtype=backward_dtype)
                             if i < in_data_dim-1:
                                 norm_sym = mx.symbol.norm(data=data, ord=order, axis=(i, i+1), keepdims=True)
-                                npy_out = l1norm(in_data, (i, i+1)) if order is 1 else l2norm(in_data, (i, i+1))
-                                npy_out_backward = np.sign(in_data) if order is 1 else in_data/npy_out
+                                npy_out = l1norm(in_data, (i, i+1)) if order == 1 else l2norm(in_data, (i, i+1))
+                                npy_out_backward = np.sign(in_data) if order == 1 else in_data/npy_out
                                 check_symbolic_forward(norm_sym, [in_data], [npy_out.astype(dtype)],
                                                        rtol=1e-2 if dtype is np.float16 else 1e-3,
                                                        atol=1e-4 if dtype is np.float16 else 1e-5, ctx=ctx)
