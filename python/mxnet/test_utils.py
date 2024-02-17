@@ -2308,7 +2308,7 @@ def chi_square_check(generator, buckets, probs, nsamples=1000000):
             buckets_npy[i * 2 + 1] = buckets[i][1]
     else:
         continuous_dist = False
-    expected_freq = (nsamples * np.array(probs, dtype=np.float32)).astype(np.int32)
+    expected_freq = np.around(nsamples * np.array(probs, dtype=np.float32)).astype(np.int32)
     if continuous_dist:
         sample_bucket_ids = np.searchsorted(buckets_npy, samples, side='right')
     else:
@@ -2321,6 +2321,13 @@ def chi_square_check(generator, buckets, probs, nsamples=1000000):
             obs_freq[i] = (sample_bucket_ids == i).sum()
         else:
             obs_freq[i] = (sample_bucket_ids == buckets[i]).sum()
+
+    # due to changes in sciPy (https://github.com/scipy/scipy/pull/13193 ),
+    # bucket counts now have to sum to the same amount, which may not always
+    # be the case because of unequal rounding to integer values. Adjust largest
+    # bucket that is least sensitive to minor changes to account for that:
+    expected_freq[np.argmax(expected_freq)] += np.sum(obs_freq) - np.sum(expected_freq)
+
     _, p = ss.chisquare(f_obs=obs_freq, f_exp=expected_freq)
     return p, obs_freq, expected_freq
 
