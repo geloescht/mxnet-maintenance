@@ -1287,8 +1287,8 @@ def test_np_get_dtype():
         [],
         (),
         [[1, 2], [3, 4]],
-        _np.random.uniform(size=rand_shape_nd(3)),
-        _np.random.uniform(size=(3, 0, 4))
+        _np.random.uniform(size=rand_shape_nd(3)).astype(_np.float32),
+        _np.random.uniform(size=(3, 0, 4)).astype(_np.float32)
     ]
     for dtype in dtypes:
         for src in objects:
